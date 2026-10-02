@@ -1,1 +1,75 @@
-<p>cadastro works!</p>
+<div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayout="column" fxFlex="1000px">
+    <form class="mt-60" #clienteFrm="ngForm" (ngSubmit)="salvar()">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Dados Pessoais</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutGap="12px">
+                    <mat-form-field class="full-width">
+                        <mat-label>Nome</mat-label>
+                        <input matInput 
+                               type="text" 
+                               placeholder="Ex: José da Silva" 
+                               name="nome" [(ngModel)]="cliente.nome">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <mat-label>CPF</mat-label>
+                        <input matInput 
+                               type="text" 
+                               placeholder="Ex: 123.456.789-00" 
+                               name="cpf" 
+                               [(ngModel)]="cliente.cpf">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="12px">
+                    <mat-form-field class="full-width">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput 
+                               type="text" 
+                               placeholder="Ex: (11) 91234-5678" 
+                               name="telefone" 
+                               [(ngModel)]="cliente.telefone">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput 
+                               type="email" 
+                               placeholder="Ex: jose.silva@email.com" 
+                               name="email" [(ngModel)]="cliente.email">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="half-width">
+                        <mat-label>Data de Nascimento</mat-label>
+                        <input matInput 
+                               type="date" 
+                               name="dataNascimento" 
+                               [(ngModel)]="cliente.dataNascimento">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button 
+                        color="primary" 
+                        type="submit" 
+                        [disabled]="!clienteFrm.form.valid">
+                        <mat-icon fontIcon="save"></mat-icon>
+                    Salvar</button>
+                <button mat-flat-button 
+                        color="primary" 
+                        type="button" 
+                        (click)="atualizar()">
+                    <mat-icon fontIcon="refresh"></mat-icon>
+                    Atualizar
+                </button>
+                <button class="ml-5" mat-flat-button color="warn" type="reset">
+                    <mat-icon fontIcon="backspace"></mat-icon>
+                    Limpar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+  </div>
+</div>
