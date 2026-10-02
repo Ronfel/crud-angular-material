@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { Cliente as ClienteService } from '../cliente';
 import { Cliente } from '../cadastro/cliente';
 import { CommonModule } from '@angular/common';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   imports: [
@@ -19,25 +20,25 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     MatTableModule,
     MatButtonModule,
-    CommonModule
-  ],
+    CommonModule,
+    MatPaginator
+],
   selector: 'app-consulta',
   styleUrl: './consulta.scss',
   templateUrl: './consulta.html',
 })
 export class Consulta {
   listaClientes: Cliente[] = [];
+  colunasTable: string[] = ['nome', 'cpf', 'telefone', 'email', 'dataNascimento'];
 
   constructor(private service: ClienteService) {
-
   }
 
   ngOnInit() {
     this.listaClientes = this.service.pesquisar('');
   }
 
-  pesquisar(nome: string) {
-    
-    this.listaClientes = this.service.pesquisar(nome);
+  pesquisar(nome: string = '') {
+    this.listaClientes = this.service.pesquisar(nome.trim());
   }
 }
