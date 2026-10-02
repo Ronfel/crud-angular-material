@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center">
   <div fxLayout="column" fxFlex="1000px">
     <form class="mt-60" #clienteFrm="ngForm" (ngSubmit)="salvar()">
-        <mat-card>
+        <mat-card appearance="outlined">
             <mat-card-header>
                 <mat-card-title>Dados Pessoais</mat-card-title>
             </mat-card-header>
@@ -12,7 +12,7 @@
                         <input matInput 
                                type="text" 
                                placeholder="Ex: José da Silva" 
-                               name="nome" [(ngModel)]="cliente.nome">
+                               name="nome" [(ngModel)]="cliente.nome" required>
                     </mat-form-field>
                     <mat-form-field class="full-width">
                         <mat-label>CPF</mat-label>
@@ -20,7 +20,7 @@
                                type="text" 
                                placeholder="Ex: 123.456.789-00" 
                                name="cpf" 
-                               [(ngModel)]="cliente.cpf">
+                               [(ngModel)]="cliente.cpf" required>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayoutGap="12px">
@@ -30,14 +30,14 @@
                                type="text" 
                                placeholder="Ex: (11) 91234-5678" 
                                name="telefone" 
-                               [(ngModel)]="cliente.telefone">
+                               [(ngModel)]="cliente.telefone" required>
                     </mat-form-field>
                     <mat-form-field class="full-width">
                         <mat-label>E-mail</mat-label>
                         <input matInput 
                                type="email" 
                                placeholder="Ex: jose.silva@email.com" 
-                               name="email" [(ngModel)]="cliente.email">
+                               name="email" [(ngModel)]="cliente.email" required>
                     </mat-form-field>
                 </div>
                 <div>
@@ -46,7 +46,7 @@
                         <input matInput 
                                type="date" 
                                name="dataNascimento" 
-                               [(ngModel)]="cliente.dataNascimento">
+                               [(ngModel)]="cliente.dataNascimento" required>
                     </mat-form-field>
                 </div>
             </mat-card-content>

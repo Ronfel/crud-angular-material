@@ -15,7 +15,17 @@ export class Cliente {
         console.log('Cliente salvo: ', cliente);
     }
 
-    obterStorage(): Cli[] {
+    pesquisar(nome: string): Cli[] {
+        let clientes: Cli[] = [];
+        let clientesStorage = localStorage.getItem(Cliente.REPO_CLIENTES);
+        if (clientesStorage) {
+            clientes = JSON.parse(clientesStorage);
+            return clientes.filter(c => c.nome?.toLowerCase().includes(nome.toLowerCase()));
+        }
+        return clientes;
+    }
+
+    private obterStorage(): Cli[] {
         let clientes: Cli[] = [];
         let clientesStorage = localStorage.getItem(Cliente.REPO_CLIENTES);
         if (clientesStorage) {
