@@ -16,7 +16,9 @@
                     </mat-form-field>
                     <mat-form-field class="full-width">
                         <mat-label>CPF</mat-label>
-                        <input matInput 
+                        <input matInput
+                               mask="000.000.000-00"
+                               [dropSpecialCharacters]="false"
                                type="text" 
                                placeholder="Ex: 123.456.789-00" 
                                name="cpf" 
@@ -27,6 +29,8 @@
                     <mat-form-field class="full-width">
                         <mat-label>Telefone</mat-label>
                         <input matInput 
+                               mask="(00) 00000-0000"
+                               [dropSpecialCharacters]="false"
                                type="text" 
                                placeholder="Ex: (11) 91234-5678" 
                                name="telefone" 
@@ -43,8 +47,11 @@
                 <div>
                     <mat-form-field class="half-width">
                         <mat-label>Data de Nascimento</mat-label>
-                        <input matInput 
-                               type="date" 
+                        <input matInput
+                               mask="d0/M0/0000"
+                               [dropSpecialCharacters]="false"
+                               type="text"
+                               placeholder="DD/MM/YYYY"
                                name="dataNascimento" 
                                [(ngModel)]="cliente.dataNascimento" required>
                     </mat-form-field>

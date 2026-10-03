@@ -11,6 +11,7 @@ import { Cliente } from '../cadastro/cliente';
 import { CommonModule } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   imports: [
@@ -22,8 +23,10 @@ import { Router } from '@angular/router';
     MatTableModule,
     MatButtonModule,
     CommonModule,
-    MatPaginator
-],
+    MatPaginator,
+    NgxMaskPipe
+  ],
+  providers: [provideNgxMask()],
   selector: 'app-consulta',
   styleUrl: './consulta.scss',
   templateUrl: './consulta.html',

@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { Cliente } from './cliente';
 import { Cliente as ClienteService } from '../cliente';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   standalone: true,
@@ -23,7 +24,10 @@ import { Cliente as ClienteService } from '../cliente';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMaskDirective
+  ], providers: [
+    provideNgxMask()
   ],
   selector: 'app-cadastro',
   styleUrl: './cadastro.scss',
