@@ -55,4 +55,13 @@ export class Cliente {
             localStorage.setItem(Cliente.REPO_CLIENTES, JSON.stringify(storage));
         }
     }
+
+    excluir(id: string): void {
+        const storage = this.obterStorage();
+        const clientes = storage.filter(cliente => cliente.id !== id);
+
+        if (clientes.length !== storage.length) {
+            localStorage.setItem(Cliente.REPO_CLIENTES, JSON.stringify(clientes));
+        }
+    }
 }

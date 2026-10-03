@@ -31,6 +31,7 @@ export class Cadastro {
 
   cliente: Cliente = Cliente.newCliente();
   modoEdicao = false;
+  confirmandoExclusao = false;
 
   constructor(
     private clienteService: ClienteService,
@@ -45,12 +46,14 @@ export class Cadastro {
         if (clienteEncontrado) {
           this.cliente = clienteEncontrado;
           this.modoEdicao = true;
+          this.confirmandoExclusao = false;
           return;
         }
       }
 
       this.cliente = Cliente.newCliente();
       this.modoEdicao = false;
+      this.confirmandoExclusao = false;
     });
   }
 
@@ -63,5 +66,18 @@ export class Cadastro {
 
     this.clienteService.salvar(this.cliente);
     this.cliente = Cliente.newCliente();
+  }
+
+  excluir(): void {
+    if (!this.modoEdicao || !this.cliente.id) {
+      return;
+    }
+
+    this.clienteService.excluir(this.cliente.id);
+    this.router.navigate(['/consulta']);
+  }
+
+  cancelarExclusao(): void {
+    this.confirmandoExclusao = false;
   }
 }

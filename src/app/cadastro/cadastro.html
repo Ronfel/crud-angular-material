@@ -58,7 +58,29 @@
                         <mat-icon [fontIcon]="modoEdicao ? 'save_as' : 'save'"></mat-icon>
                     {{ modoEdicao ? 'Atualizar' : 'Salvar' }}
                 </button>
-                <button class="ml-5" mat-flat-button color="warn" type="reset">
+                <button *ngIf="modoEdicao && !confirmandoExclusao" class="ml-5" mat-flat-button
+                        color="warn"
+                        type="button"
+                        (click)="confirmandoExclusao = true">
+                    <mat-icon fontIcon="delete"></mat-icon>
+                    Excluir cliente
+                </button>
+                <ng-container *ngIf="confirmandoExclusao">
+                    <span>Confirmar a exclusão deste cliente?</span>
+                    <button class="ml-5" mat-flat-button
+                            color="warn"
+                            type="button"
+                            (click)="excluir()">
+                        <mat-icon fontIcon="delete_forever"></mat-icon>
+                        Confirmar exclusão
+                    </button>
+                    <button class="ml-5" mat-button
+                            type="button"
+                            (click)="cancelarExclusao()">
+                        Cancelar
+                    </button>
+                </ng-container>
+                <button *ngIf="!modoEdicao" class="ml-5" mat-flat-button color="warn" type="reset">
                     <mat-icon fontIcon="backspace"></mat-icon>
                     Limpar
                 </button>
