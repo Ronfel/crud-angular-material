@@ -3,7 +3,7 @@
     <form class="mt-60" #clienteFrm="ngForm" (ngSubmit)="salvar()">
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Dados Pessoais</mat-card-title>
+                <mat-card-title>{{ modoEdicao ? 'Editar Cliente' : 'Dados Pessoais' }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <div fxLayout="row" fxLayoutGap="12px">
@@ -55,14 +55,8 @@
                         color="primary" 
                         type="submit" 
                         [disabled]="!clienteFrm.form.valid">
-                        <mat-icon fontIcon="save"></mat-icon>
-                    Salvar</button>
-                <button mat-flat-button 
-                        color="primary" 
-                        type="button" 
-                        (click)="atualizar()">
-                    <mat-icon fontIcon="refresh"></mat-icon>
-                    Atualizar
+                        <mat-icon [fontIcon]="modoEdicao ? 'save_as' : 'save'"></mat-icon>
+                    {{ modoEdicao ? 'Atualizar' : 'Salvar' }}
                 </button>
                 <button class="ml-5" mat-flat-button color="warn" type="reset">
                     <mat-icon fontIcon="backspace"></mat-icon>

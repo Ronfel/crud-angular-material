@@ -1,7 +1,7 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Cliente as Cli } from './cadastro/cliente';
 
-@Service()
+@Injectable({ providedIn: 'root' })
 export class Cliente {
 
     static REPO_CLIENTES = '_CLIENTES';
@@ -16,27 +16,43 @@ export class Cliente {
     }
 
     pesquisar(nome: string): Cli[] {
-        let clientes: Cli[] = [];
-        let clientesStorage = localStorage.getItem(Cliente.REPO_CLIENTES);
-        if (clientesStorage) {
-            clientes = JSON.parse(clientesStorage);
-            return clientes.filter(c => c.nome?.toLowerCase().includes(nome.toLowerCase()));
+        const clientes = this.obterStorage();
+        const termo = (nome ?? '').trim().toLowerCase();
+
+        if (!termo) {
+            return clientes;
         }
-        return clientes;
+
+        return clientes.filter(c => c.nome?.toLowerCase().includes(termo));
+    }
+
+    buscarPorId(id: string): Cli | undefined {
+        return this.obterStorage().find(c => c.id === id);
     }
 
     private obterStorage(): Cli[] {
         let clientes: Cli[] = [];
-        let clientesStorage = localStorage.getItem(Cliente.REPO_CLIENTES);
+        const clientesStorage = localStorage.getItem(Cliente.REPO_CLIENTES);
+
         if (clientesStorage) {
-            clientes = JSON.parse(clientesStorage);
-            return clientes;
+            try {
+                clientes = JSON.parse(clientesStorage) ?? [];
+            } catch {
+                clientes = [];
+            }
         }
+
         localStorage.setItem(Cliente.REPO_CLIENTES, JSON.stringify(clientes));
         return clientes;
     }
-    
-    atualizar(cliente: Cli) {
-        console.log('Cliente atualizado: ', cliente);
+
+    atualizar(cliente: Cli): void {
+        const storage = this.obterStorage();
+        const index = storage.findIndex(c => c.id === cliente.id);
+
+        if (index >= 0) {
+            storage[index] = cliente;
+            localStorage.setItem(Cliente.REPO_CLIENTES, JSON.stringify(storage));
+        }
     }
 }

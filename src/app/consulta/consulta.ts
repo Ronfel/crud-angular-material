@@ -55,6 +55,6 @@ export class Consulta implements OnInit, AfterViewInit {
 
   editar(id: string): void {
     console.log('Editar cliente com ID: ', id);
-    this.router.navigate(['/cadastro', { queryParams: { "id": id } }]);
+    this.router.navigate(['/cadastro'], { queryParams: { id } });
   }
 }
