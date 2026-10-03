@@ -15,6 +15,8 @@ import { Cliente } from '../cadastro/cliente';
 })
 export class Dashboard implements OnInit {
   totalClientes = 0;
+  clientesAtivos = 0;
+  clientesInativos = 0;
   clientesRecentes: Cliente[] = [];
 
   constructor(private clienteService: ClienteService) {}
@@ -22,6 +24,17 @@ export class Dashboard implements OnInit {
   ngOnInit(): void {
     const clientes = this.clienteService.pesquisar('');
     this.totalClientes = clientes.length;
+    this.clientesAtivos = clientes.filter(cliente => cliente.ativo !== false).length;
+    this.clientesInativos = clientes.filter(cliente => cliente.ativo === false).length;
     this.clientesRecentes = clientes.slice(-5).reverse();
+  }
+
+  get graficoPizza(): string {
+    if (this.totalClientes === 0) {
+      return 'conic-gradient(#e0e0e0 0% 100%)';
+    }
+
+    const percentualAtivos = (this.clientesAtivos / this.totalClientes) * 100;
+    return `conic-gradient(#225bed 0% ${percentualAtivos}%, #de2929 ${percentualAtivos}% 100%)`;
   }
 }

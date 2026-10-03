@@ -24,6 +24,32 @@
     </mat-card-content>
   </mat-card>
 
+  <mat-card appearance="outlined" class="status-card">
+    <mat-card-header>
+      <mat-card-title>Clientes ativos e inativos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="status-content">
+      <div
+        class="grafico-pizza"
+        role="img"
+        [style.background]="graficoPizza"
+        [attr.aria-label]="clientesAtivos + ' clientes ativos e ' + clientesInativos + ' clientes inativos'">
+      </div>
+      <ul class="legenda">
+        <li>
+          <span class="marcador ativo"></span>
+          <span>Ativos</span>
+          <strong>{{ clientesAtivos }}</strong>
+        </li>
+        <li>
+          <span class="marcador inativo"></span>
+          <span>Inativos</span>
+          <strong>{{ clientesInativos }}</strong>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
   <mat-card appearance="outlined" class="recentes-card">
     <mat-card-header>
       <mat-card-title>Últimos clientes cadastrados</mat-card-title>
