@@ -7,6 +7,7 @@ export class Cliente {
     dataNascimento?: string;
     email?: string;
     telefone?: string;
+    ativo = true;
 
     static newCliente(): Cliente {
         let cliente = new Cliente();

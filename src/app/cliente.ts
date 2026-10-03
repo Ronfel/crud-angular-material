@@ -36,7 +36,11 @@ export class Cliente {
 
         if (clientesStorage) {
             try {
-                clientes = JSON.parse(clientesStorage) ?? [];
+                const clientesSalvos: Cli[] = JSON.parse(clientesStorage) ?? [];
+                clientes = clientesSalvos.map(cliente => ({
+                    ...cliente,
+                    ativo: cliente.ativo ?? true
+                }));
             } catch {
                 clientes = [];
             }
@@ -51,7 +55,7 @@ export class Cliente {
         const index = storage.findIndex(c => c.id === cliente.id);
 
         if (index >= 0) {
-            storage[index] = cliente;
+            storage[index] = { ...cliente, ativo: cliente.ativo ?? true };
             localStorage.setItem(Cliente.REPO_CLIENTES, JSON.stringify(storage));
         }
     }
