@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { installMatchMediaMock } from '../../testing/match-media';
 import { Cadastro } from './cadastro';
 
 describe('Cadastro', () => {
@@ -6,6 +7,8 @@ describe('Cadastro', () => {
   let fixture: ComponentFixture<Cadastro>;
 
   beforeEach(async () => {
+    installMatchMediaMock();
+
     await TestBed.configureTestingModule({
       imports: [Cadastro],
     }).compileComponents();
