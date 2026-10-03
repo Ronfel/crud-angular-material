@@ -3,6 +3,7 @@ import { Cadastro } from './cadastro/cadastro';
 import { Consulta } from './consulta/consulta';
 
 export const routes: Routes = [
+    { path: 'cadastro/novo', component: Cadastro },
     { path: 'cadastro', component: Cadastro},
     { path: 'consulta', component: Consulta },
 ];
