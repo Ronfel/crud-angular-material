@@ -10,6 +10,7 @@ import { Cliente as ClienteService } from '../cliente';
 import { Cliente } from '../cadastro/cliente';
 import { CommonModule } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [
@@ -29,11 +30,14 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class Consulta implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Cliente>([]);
-  colunasTable: string[] = ['nome', 'cpf', 'telefone', 'email', 'dataNascimento'];
+  colunasTable: string[] = ['nome', 'cpf', 'telefone', 'email', 'dataNascimento', 'acoes'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private service: ClienteService) {
+  constructor(
+    private service: ClienteService,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -47,5 +51,10 @@ export class Consulta implements OnInit, AfterViewInit {
   pesquisar(nome: string = ''): void {
     this.dataSource.data = this.service.pesquisar(nome.trim());
     this.paginator.firstPage();
+  }
+
+  editar(id: string): void {
+    console.log('Editar cliente com ID: ', id);
+    this.router.navigate(['/cadastro', { queryParams: { "id": id } }]);
   }
 }
