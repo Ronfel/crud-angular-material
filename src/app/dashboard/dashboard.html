@@ -1,0 +1,52 @@
+<main class="dashboard">
+  <section class="boas-vindas">
+    <h1>Visão geral dos clientes</h1>
+    <p>Acompanhe seus cadastros e acesse rapidamente as principais ações.</p>
+    <div class="acoes">
+      <a mat-flat-button color="primary" routerLink="/cadastro/novo">
+        <mat-icon fontIcon="person_add"></mat-icon>
+        Cadastrar cliente
+      </a>
+      <a mat-stroked-button routerLink="/consulta">
+        <mat-icon fontIcon="search"></mat-icon>
+        Consultar clientes
+      </a>
+    </div>
+  </section>
+
+  <mat-card appearance="outlined" class="total-card">
+    <mat-card-content>
+      <mat-icon fontIcon="groups" aria-hidden="true"></mat-icon>
+      <div>
+        <p class="rotulo">Clientes cadastrados</p>
+        <p class="total">{{ totalClientes }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="recentes-card">
+    <mat-card-header>
+      <mat-card-title>Últimos clientes cadastrados</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (clientesRecentes.length > 0) {
+        <ul>
+          @for (cliente of clientesRecentes; track cliente.id) {
+            <li>
+              <span>{{ cliente.nome }}</span>
+              <a mat-button [routerLink]="['/cadastro']" [queryParams]="{ id: cliente.id }">
+                <mat-icon fontIcon="edit"></mat-icon>
+                Editar
+              </a>
+            </li>
+          }
+        </ul>
+      } @else {
+        <div class="estado-vazio">
+          <p>Ainda não há clientes cadastrados.</p>
+          <a mat-button color="primary" routerLink="/cadastro/novo">Cadastre o primeiro cliente</a>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</main>

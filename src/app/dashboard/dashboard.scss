@@ -1,0 +1,75 @@
+.dashboard {
+  display: grid;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.boas-vindas h1 {
+  margin-bottom: 8px;
+}
+
+.boas-vindas p,
+.rotulo {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.total-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.total-card mat-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.rotulo,
+.total {
+  margin: 0;
+}
+
+.total {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.recentes-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.recentes-card li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.recentes-card li:last-child {
+  border-bottom: 0;
+}
+
+.estado-vazio {
+  padding: 12px 0;
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    margin-top: 24px;
+    padding: 0 12px;
+  }
+}
