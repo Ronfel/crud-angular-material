@@ -44,7 +44,7 @@
                                name="email" [(ngModel)]="cliente.email" required>
                     </mat-form-field>
                 </div>
-                <div>
+                <div fxLayout="row" fxLayoutGap="12px">
                     <mat-form-field class="half-width">
                         <mat-label>Data de Nascimento</mat-label>
                         <input matInput
@@ -55,6 +55,43 @@
                                name="dataNascimento" 
                                [(ngModel)]="cliente.dataNascimento" required>
                     </mat-form-field>
+                    <mat-form-field class="half-width">
+                        <mat-label>UF</mat-label>
+                        <mat-select name="uf" [(ngModel)]="cliente.uf"
+                                    (ngModelChange)="aoAlterarUf($event)" required>
+                            <mat-option value="" disabled>
+                                {{ carregandoUfs ? 'Carregando UFs...' : 'Selecione a UF' }}
+                            </mat-option>
+                            <mat-option *ngFor="let uf of ufs" [value]="uf">
+                                {{ uf }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="12px">
+                    <mat-form-field class="half-width">
+                        <mat-label>Município</mat-label>
+                        <mat-select name="municipio" [(ngModel)]="cliente.municipio"
+                                    [disabled]="!cliente.uf || carregandoMunicipios" required>
+                            <mat-option value="" disabled>
+                                {{ carregandoMunicipios ? 'Carregando municípios...' : 'Selecione o município' }}
+                            </mat-option>
+                            <mat-option *ngFor="let municipio of municipios" [value]="municipio">
+                                {{ municipio }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="erroCarregamentoUfs" role="alert">
+                    Não foi possível carregar as UFs.
+                    <button mat-button type="button" (click)="carregarUfs()">Tentar novamente</button>
+                </div>
+                <div *ngIf="erroCarregamentoMunicipios" role="alert">
+                    Não foi possível carregar os municípios.
+                    <button mat-button type="button"
+                            (click)="cliente.uf && carregarMunicipios(cliente.uf, false)">
+                        Tentar novamente
+                    </button>
                 </div>
                 <mat-slide-toggle name="ativo" [(ngModel)]="cliente.ativo">
                     Ativo

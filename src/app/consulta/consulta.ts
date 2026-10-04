@@ -33,7 +33,7 @@ import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 })
 export class Consulta implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Cliente>([]);
-  colunasTable: string[] = ['nome', 'cpf', 'telefone', 'email', 'dataNascimento', 'ativo', 'acoes'];
+  colunasTable: string[] = ['nome', 'cpf', 'telefone', 'email', 'dataNascimento', 'uf', 'municipio', 'ativo', 'acoes'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

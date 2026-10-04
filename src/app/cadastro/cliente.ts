@@ -7,6 +7,8 @@ export class Cliente {
     dataNascimento?: string;
     email?: string;
     telefone?: string;
+    uf?: string;
+    municipio?: string;
     ativo = true;
 
     static newCliente(): Cliente {
