@@ -1,7 +1,8 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +28,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     MatIconModule,
     MatButtonModule,
     MatSlideToggleModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+   
   ], providers: [
     provideNgxMask()
   ],
@@ -40,6 +42,7 @@ export class Cadastro implements OnInit {
   cliente: Cliente = Cliente.newCliente();
   modoEdicao = false;
   confirmandoExclusao = false;
+  snack: MatSnackBar = inject(MatSnackBar);
 
   constructor(
     private clienteService: ClienteService,
@@ -73,11 +76,13 @@ export class Cadastro implements OnInit {
     if (this.modoEdicao) {
       this.clienteService.atualizar(this.cliente);
       this.router.navigate(['/consulta']);
+      this.mostrarMensagem('Cliente atualizado com sucesso!');
       return;
     }
 
     this.clienteService.salvar(this.cliente);
     this.cliente = Cliente.newCliente();
+    this.mostrarMensagem('Cliente cadastrado com sucesso!');
   }
 
   excluir(): void {
@@ -91,5 +96,11 @@ export class Cadastro implements OnInit {
 
   cancelarExclusao(): void {
     this.confirmandoExclusao = false;
+  }
+
+  mostrarMensagem(mensagem: string): void {
+    this.snack.open(mensagem, 'Ok', {
+      duration: 3000,
+    });
   }
 }
