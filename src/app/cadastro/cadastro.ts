@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -59,7 +59,8 @@ export class Cadastro implements OnInit {
     private clienteService: ClienteService,
     private router: Router,
     private destroyRef: DestroyRef,
-    private brasilApiService: BrasilApiService
+    private brasilApiService: BrasilApiService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
   }
 
@@ -87,11 +88,13 @@ export class Cadastro implements OnInit {
         next: estados => {
           this.ufs = estados.map(estado => estado.sigla);
           this.carregandoUfs = false;
+          this.changeDetectorRef.markForCheck();
         },
         error: () => {
           this.carregandoUfs = false;
           this.erroCarregamentoUfs = true;
           this.mostrarMensagem('Não foi possível carregar as UFs. Tente novamente.');
+          this.changeDetectorRef.markForCheck();
         }
       });
   }
@@ -123,11 +126,13 @@ export class Cadastro implements OnInit {
         next: municipios => {
           this.municipios = municipios.map(municipio => municipio.nome);
           this.carregandoMunicipios = false;
+          this.changeDetectorRef.markForCheck();
         },
         error: () => {
           this.carregandoMunicipios = false;
           this.erroCarregamentoMunicipios = true;
           this.mostrarMensagem('Não foi possível carregar os municípios. Tente novamente.');
+          this.changeDetectorRef.markForCheck();
         }
       });
   }
